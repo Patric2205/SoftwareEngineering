@@ -32,4 +32,22 @@ jobs:
       - name: Build with Maven
         run: |
           if [ -f "./mvnw" ]; then
-            ./mvnw -
+            ./mvnw -B clean install
+          else
+            mvn -B clean install
+          fi
+
+      - name: Run Maven Verify
+        run: |
+          if [ -f "./mvnw" ]; then
+            ./mvnw -B verify
+          else
+            mvn -B verify
+          fi
+
+      - name: Upload test reports (falls vorhanden)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
