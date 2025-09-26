@@ -10,48 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-name: Checkout repository
-  uses: actions/checkout@v4
+      - name: Set up JDK 25 (Oracle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: oracle
+          java-version: '25'
+          cache: maven
 
+      - name: Verify Maven Wrapper or Install Maven
+        run: |
+          if [ -f "./mvnw" ]; then
+            echo "Maven Wrapper gefunden"
+            chmod +x mvnw
+          else
+            echo "Kein Maven Wrapper gefunden, benutze System-Maven"
+          fi
 
-name: Set up JDK 25 (Oracle)
-  uses: actions/setup-java@v4
-  with:
-    distribution: oracle
-    java-version: '25'
-    cache: maven
-
-
-name: Verify Maven Wrapper or Install Maven
-  run: |
-    if [ -f "./mvnw" ]; then
-      echo "Maven Wrapper gefunden"
-      chmod +x mvnw
-    else
-      echo "Kein Maven Wrapper gefunden, benutze System-Maven"
-    fi
-
-
-name: Build with Maven
-  run: |
-    if [ -f "./mvnw" ]; then./mvnw -B clean install
-    else
-      mvn -B clean install
-    fi
-
-
-name: Run Maven Verify
-  run: |
-    if [ -f "./mvnw" ]; then./mvnw -B verify
-    else
-      mvn -B verify
-    fi
-
-
-name: Upload test reports (falls vorhanden)
-  if: always()
-  uses: actions/upload-artifact@v4
-  with:
-    name: surefire-reports
-    path: target/surefire-reports
+      - name: Build with Maven
+        run: |
+          if [ -f "./mvnw" ]; then
+            ./mvnw -
