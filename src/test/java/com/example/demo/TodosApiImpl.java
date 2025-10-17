@@ -32,5 +32,6 @@ class TodosApiImplTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals(expectedResultList, result.getBody());
+
     }
 }
