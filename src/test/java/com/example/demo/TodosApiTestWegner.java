@@ -8,11 +8,9 @@ import static org.mockito.Mockito.*;
 
 import org.springframework.http.ResponseEntity;
 
-import com.example.demo.model.Todo;
 import com.example.demo.model.TodoInput;
-import com.example.demo.TodosStorageService;
 
-public class TodosApiTest {private TodosStorageService todosStorageService;
+public class TodosApiTestWegner {private TodosStorageService todosStorageService;
     private TodosApiImpl todosApiImpl;
 
     @BeforeEach
