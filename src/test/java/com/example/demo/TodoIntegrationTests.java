@@ -52,6 +52,14 @@ public class TodoIntegrationTests {
 
         // Step 2: Retrieve the created todo item by ID and check the response again
 
+        MvcResult getResult = mockMvc.perform(get("/todos/0")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String getResponse = getResult.getResponse().getContentAsString();
+        JSONAssert.assertEquals(expectedResponse, getResponse, true);
+
     }
 
 
