@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,5 +34,17 @@ class TodosApiImplTest {
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals(expectedResultList, result.getBody());
 
+    }
+
+    @Test
+    public void getTodoById() {
+        int id = 1;
+        Todo existingTodo = mock(Todo.class);
+        when(todosStorageService.todosIdGet(id)).thenReturn(existingTodo);
+
+        ResponseEntity<Todo> result = underTest.getTodoById(id);
+
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(existingTodo, result.getBody());
     }
 }
