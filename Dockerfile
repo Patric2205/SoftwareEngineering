@@ -1,5 +1,6 @@
-# ---- STAGE 1: Build ----
-FROM maven:3.9.9-eclipse-temurin-25 AS build
+# ---- STAGE 1: Custom Build Stage ----
+FROM eclipse-temurin:25-jdk AS build
+RUN apt-get update && apt-get install -y maven
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
@@ -8,6 +9,5 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:25-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
