@@ -51,3 +51,9 @@ jobs:
         with:
           name: surefire-reports
           path: target/surefire-reports
+
+      - name: Build Docker image
+        uses: whoan/docker-build-with-cache-action@v8
+        with:
+          image_name: ${{ Patric2205.SoftwareEngineering }}
+          push_image_and_stages: false
