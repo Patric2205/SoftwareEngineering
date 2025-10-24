@@ -79,11 +79,11 @@ jobs:
                 run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
               - name: Pull Docker image
-                run: docker pull ghcr.io/${{ github.repository }}:latest
+                run: docker pull ghcr.io/"patric2205/softwareengineering":latest
 
               - name: Run container
                 run: |
-                  docker run -d -p 8080:8080 --name myapi ghcr.io/${{ github.repository }}:latest
+                  docker run -d -p 8080:8080 --name myapi ghcr.io/"patric2205/softwareengineering":latest
                   # Wait for container to be ready
                   sleep 5
 
