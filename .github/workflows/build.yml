@@ -4,6 +4,13 @@ on:
   push:          # bei jedem Push ausführen
   pull_request:  # zusätzlich bei Pull Requests prüfen
 
+env:
+  REGISTRY: ghcr.io
+
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build:
     name: Build and Test with Maven
@@ -55,5 +62,8 @@ jobs:
       - name: Build Docker image
         uses: whoan/docker-build-with-cache-action@v8
         with:
+          username: ${{ github.actor }}
+          password: "${{ secrets.GITHUB_TOKEN }}"
+          registry: ${{ env.REGISTRY }}
           image_name: "patric2205/softwareengineering"
-          push_image_and_stages: false
+
