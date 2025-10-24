@@ -55,5 +55,5 @@ jobs:
       - name: Build Docker image
         uses: whoan/docker-build-with-cache-action@v8
         with:
-          image_name: ${{ Patric2205.SoftwareEngineering }}
+          image_name: ${{ github.repository }}
           push_image_and_stages: false
