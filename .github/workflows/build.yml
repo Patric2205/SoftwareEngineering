@@ -55,5 +55,5 @@ jobs:
       - name: Build Docker image
         uses: whoan/docker-build-with-cache-action@v8
         with:
-          image_name: "patric2205/softwareengineering:tmp_tag_ignore"
+          image_name: "patric2205/softwareengineering"
           push_image_and_stages: false
